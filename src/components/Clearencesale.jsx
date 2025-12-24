@@ -44,7 +44,7 @@ setisAdded(!isAdded)
   return (
     <div>
       <Clearence>
-        <h1 className="text-2xl font-bold mb-4 text-red-500">Clearence Sale</h1>
+        <h1 className="text-2xl font-bold mb-4 text-red-500">Christmas Sale is live</h1>
 
         {error && <p className="text-red-500">{error}</p>}
 
