@@ -110,7 +110,7 @@ function NavigationMenuViewport({
 function NavigationMenuLink({
   className,
   ...props
-}) {
+}) 
   return (
     <NavigationMenuPrimitive.Link
       data-slot="navigation-menu-link"
