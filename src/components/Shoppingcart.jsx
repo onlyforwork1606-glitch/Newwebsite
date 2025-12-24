@@ -46,7 +46,7 @@ const Shoppingcart = () => {
   return (
     <div>
       <h1 className="font-bartle font-bold text-5xl tracking-[1px] ml-4">
-        SHOPPING CART
+        SHOPPING Cart (updated through git ) 
       </h1>
 
       <div className="flex mt-5 justify-between gap-5">
