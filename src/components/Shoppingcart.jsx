@@ -1,6 +1,6 @@
 import React from "react";
 import usecartstore from "./Statemanagement";
-import Delete from "../assets/images/bin.svg";
+import Delete from "../assets/images/Bin.svg";
 import Payment from "../assets/images/paymentlogos.png";
 import { Link } from "react-router-dom";
 
