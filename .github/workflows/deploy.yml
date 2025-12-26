@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Deploy React App to Cloudflare Pages
 
 on:
   push:
@@ -8,34 +8,26 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Updated to Node 20 to fix the version error
+          node-version: 18
 
       - name: Install dependencies
-        working-directory: Newwebsite
         run: npm install
 
-      - name: Build React App
-        working-directory: Newwebsite
+      - name: Build project
         run: npm run build
-        env:
-          CI: false
 
-      - name: Publish to Cloudflare Pages
+      - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
-          # Path to your build folder
-          directory: Newwebsite/dist
+          projectName: your-project-name
+          directory: build
