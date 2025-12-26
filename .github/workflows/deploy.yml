@@ -19,8 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          # Cache is removed here to prevent the "path not resolved" error
+          node-version: '20' # Updated to Node 20 to fix the version error
 
       - name: Install dependencies
         working-directory: Newwebsite
@@ -38,5 +37,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
-          # This must point to where the 'build' or 'dist' folder ends up
+          # Path to your build folder
           directory: Newwebsite/dist
