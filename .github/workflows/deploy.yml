@@ -1,31 +1,43 @@
-name: Deploy Cloudflare Worker
+name: Deploy to Cloudflare Pages
 
 on:
   push:
     branches:
-      - main  # Trigger deployment on push to 'main'
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # This tells GitHub to run all 'run' steps inside your subfolder
+    defaults:
+      run:
+        working-directory: Newwebsite 
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'  # Use the Node.js version that fits your needs
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          # If package-lock.json is in the subfolder, tell the cache where it is
+          cache-dependency-path: Newwebsite/package-lock.json
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Install Wrangler CLI
-      run: npm install -g wrangler
+      - name: Build React App
+        run: npm run build
+        env:
+          CI: false
 
-    - name: Authenticate Wrangler
-      run: wrangler login --api-key ${{ secrets.CLOUDFLARE_API_KEY }}
-
-    - name: Deploy to Cloudflare Worker
-      run: wrangler publish --env production  # Publish the worker
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+          # Path to the build folder relative to the root
+          directory: Newwebsite/dist
