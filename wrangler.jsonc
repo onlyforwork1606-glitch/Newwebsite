@@ -1,7 +1,7 @@
 {
-  "name": "funkyfabrics",
-  "compatibility_date": "2025-12-24",
+  "name": "Funky Fabrics dev",
+  "compatibility_date": "2025-12-27",
   "assets": {
-    "directory": "./dist"
+    "directory": "dist"
   }
 }
